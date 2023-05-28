@@ -11,17 +11,27 @@
 
 <body>
     <h1>Audio player</h1>
-    <h2>Gap Fill Exercise</h2>
 
-    <form>
+    <h2>Gap Fill Exercise</h2>
+    <audio controls preload="auto">
+        <source src="data/brazil-oil.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+      </audio>
+    <p id="paragraph"></p>
+    <!-- <form>
         <label for="inputParagraph">Paragraph:</label><br>
         <textarea id="inputParagraph" rows="5" cols="50"></textarea><br><br>
         <button type="button" onclick="generateGapFill()">Generate Gap Fill</button>
     </form>
 
-    <div id="output"></div>
+    <div id="output"></div> -->
 
     <script>
+        fetch("data/brazil-oil.txt")
+        .then(x => x.text())
+        .then(x => document.getElementById("paragraph").innerHTML = x);
+    </script>
+    <!-- <script>
         function generateGapFill() {
             var inputParagraph = document.getElementById("inputParagraph").value;
             var words = inputParagraph.split(" ");
@@ -39,7 +49,7 @@
 
             document.getElementById("output").innerHTML = "<p>" + outputParagraph + "</p>";
         }
-    </script>
+    </script> -->
 </body>
 
 </html>
