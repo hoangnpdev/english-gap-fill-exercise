@@ -15,8 +15,8 @@
     <h2>Gap Fill Exercise</h2>
     <audio controls preload="auto">
         <source src="data/brazil-oil.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-      </audio>
+        Your browser does not support the audio element.
+    </audio>
     <p id="paragraph"></p>
     <!-- <form>
         <label for="inputParagraph">Paragraph:</label><br>
@@ -27,29 +27,28 @@
     <div id="output"></div> -->
 
     <script>
-        fetch("data/brazil-oil.txt")
-        .then(x => x.text())
-        .then(x => document.getElementById("paragraph").innerHTML = x);
-    </script>
-    <!-- <script>
-        function generateGapFill() {
-            var inputParagraph = document.getElementById("inputParagraph").value;
-            var words = inputParagraph.split(" ");
-            var outputParagraph = "";
-
+        function generateGapFill(paragraph) {
+            var words = paragraph.split(" ");
             for (var i = 0; i < words.length; i++) {
                 var word = words[i];
                 if (word.length > 0) {
-                    outputParagraph += '<input type="text" class="gap-fill" id="gap-' + i + '">';
+                    if (Math.floor(Math.random() * 10) == 0) {
+                        outputParagraph += '<input type="text" class="gap-fill" id="gap-' + i + '">';
+                    } else {
+                        outputParagraph = word + ' ';
+                    }
                 }
                 if (i !== words.length - 1) {
                     outputParagraph += " ";
                 }
             }
+            return outputParagraph;
+        };
 
-            document.getElementById("output").innerHTML = "<p>" + outputParagraph + "</p>";
-        }
-    </script> -->
+        fetch("data/brazil-oil.txt")
+            .then(x => x.text())
+            .then(x => document.getElementById("paragraph").innerHTML = generateGapFill(x));
+    </script>
 </body>
 
 </html>
