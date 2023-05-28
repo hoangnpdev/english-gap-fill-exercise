@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Audio player</h1>
+    <h2>Gap Fill Exercise</h2>
+
+    <form>
+        <label for="inputParagraph">Paragraph:</label><br>
+        <textarea id="inputParagraph" rows="5" cols="50"></textarea><br><br>
+        <button type="button" onclick="generateGapFill()">Generate Gap Fill</button>
+    </form>
+
+    <div id="output"></div>
+
+    <script>
+        function generateGapFill() {
+            var inputParagraph = document.getElementById("inputParagraph").value;
+            var words = inputParagraph.split(" ");
+            var outputParagraph = "";
+
+            for (var i = 0; i < words.length; i++) {
+                var word = words[i];
+                if (word.length > 0) {
+                    outputParagraph += '<input type="text" class="gap-fill" id="gap-' + i + '">';
+                }
+                if (i !== words.length - 1) {
+                    outputParagraph += " ";
+                }
+            }
+
+            document.getElementById("output").innerHTML = "<p>" + outputParagraph + "</p>";
+        }
+    </script>
+</body>
+
+</html>
