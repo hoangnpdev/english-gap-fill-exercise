@@ -6,7 +6,51 @@
         #output {
             margin-top: 20px;
         }
+
+        .tooltip {
+            position: relative;
+            border-bottom: 1px dotted black;
+        }
+
+        .tooltip span {
+            visibility: hidden;
+            width: 10em;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 9;
+            top: -1em;
+            left: 100%;
+            margin-left: 1em;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .tooltip span::after {
+            content: "";
+            position: absolute;
+            top: 1.5em;
+            right: 100%;
+            margin-top: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent black transparent transparent;
+        }
+
+        .tooltip input {
+            display: none;
+        }
+
+        .tooltip input:checked+span {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -28,20 +72,19 @@
 
     <script>
         function generateGapFill(paragraph) {
+            var outputParagraph = '';
             var words = paragraph.split(" ");
             for (var i = 0; i < words.length; i++) {
                 var word = words[i];
                 if (word.length > 0) {
                     if (Math.floor(Math.random() * 10) == 0) {
-                        outputParagraph += '<input type="text" class="gap-fill" id="gap-' + i + '">';
+                        outputParagraph += '<input type="text" size="6" class="gap-fill" id="gap-' + i + '"> <label class="tooltip"><i class="fa fa-question"></i><input type="checkbox"><span>' + word + '</span></label> ';
                     } else {
-                        outputParagraph = word + ' ';
+                        outputParagraph += word + ' ';
                     }
                 }
-                if (i !== words.length - 1) {
-                    outputParagraph += " ";
-                }
             }
+            console.log(outputParagraph);
             return outputParagraph;
         };
 
