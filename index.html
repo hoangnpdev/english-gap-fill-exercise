@@ -48,6 +48,16 @@
             visibility: visible;
             opacity: 1;
         }
+
+        input {
+            outline: 0;
+            border-width: 0 0 2px;
+            border-color: grey;
+        }
+
+        input:focus {
+            border-color: grey;
+        }
     </style>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -71,6 +81,14 @@
     <div id="output"></div> -->
 
     <script>
+        function validate(input, word) {
+            if (input.value.toLowerCase().trim() == word.toLowerCase().trim()) {
+                document.getElementById(input.id).style.borderColor = "Chartreuse";
+            } else {
+                document.getElementById(input.id).style.borderColor = "red";
+            }
+        };
+
         function generateGapFill(paragraph) {
             var outputParagraph = '';
             var words = paragraph.split(" ");
@@ -78,13 +96,12 @@
                 var word = words[i];
                 if (word.length > 0) {
                     if (Math.floor(Math.random() * 10) == 0) {
-                        outputParagraph += '<input type="text" size="6" class="gap-fill" id="gap-' + i + '"> <label class="tooltip"><i class="fa fa-question"></i><input type="checkbox"><span>' + word + '</span></label> ';
+                        outputParagraph += '<input onkeyup="validate(this, &quot;' + word + '&quot;)" type="text" size="6" class="gap-fill" id="gap-' + i + '"> <label class="tooltip"><i class="fa fa-question"></i><input type="checkbox"><span>' + word + '</span></label> ';
                     } else {
                         outputParagraph += word + ' ';
                     }
                 }
             }
-            console.log(outputParagraph);
             return outputParagraph;
         };
 
