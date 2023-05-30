@@ -49,14 +49,50 @@
             opacity: 1;
         }
 
-        input {
+        p input {
             outline: 0;
-            border-width: 0 0 2px;
+            border-width: 0 0 4px;
             border-color: grey;
         }
 
-        input:focus {
+        p input:focus {
             border-color: grey;
+        }
+
+        section.range-slider {
+            position: relative;
+            width: 200px;
+            height: 35px;
+            text-align: center;
+        }
+
+        section.range-slider input {
+            pointer-events: none;
+            position: absolute;
+            overflow: hidden;
+            left: 0;
+            top: 15px;
+            width: 600px;
+            outline: none;
+            height: 18px;
+            margin: 0;
+            padding: 0;
+        }
+
+        section.range-slider input::-webkit-slider-thumb {
+            pointer-events: all;
+            position: relative;
+            z-index: 1;
+            outline: 0;
+        }
+
+        section.range-slider input::-moz-range-thumb {
+            pointer-events: all;
+            position: relative;
+            z-index: 10;
+            -moz-appearance: none;
+            width: 6px;
+            background-color: whitesmoke;
         }
     </style>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -64,23 +100,66 @@
 </head>
 
 <body>
-    <h1>Audio player</h1>
 
     <h2>Gap Fill Exercise</h2>
-    <audio controls preload="auto">
+    <audio id="audio" controls preload="auto" onpause="loopAudio()" ontimeupdate="pauseOnTime()">
         <source src="data/brazil-oil.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
-    <p id="paragraph"></p>
-    <!-- <form>
-        <label for="inputParagraph">Paragraph:</label><br>
-        <textarea id="inputParagraph" rows="5" cols="50"></textarea><br><br>
-        <button type="button" onclick="generateGapFill()">Generate Gap Fill</button>
-    </form>
-
-    <div id="output"></div> -->
-
+    <div>
+        <div><span id="show-low">0:00</span> - <span id="show-high">0:00</span></div>
+        <button onclick="replay()">Replay</button>
+        <label>Loop: </label><input type="checkbox" id="loop" name="loop" value="loop">
+        <section class="range-slider" width="">
+            <span class="rangeValues"></span>
+            <input  onchange="updateLow(this.value)" id="low" value="5" min="0" max="600" step="1" type="range">
+            <input  onchange="updateHigh(this.value)" id="high" value="10" min="0" max="600" step="1" type="range">
+          </section>
+    </div>
+    <div>
+        <button onclick="showParagraph()">Show/Hide</button>
+        <label>No. Gap: </label><input>
+        <label>Length. Gap: </label><input>
+    </div>
+    <p id="paragraph" style="visibility: hidden;"></p>
     <script>
+        function loopAudio() {
+            if (document.getElementById("loop").checked) {
+                replay();
+            }
+        };
+
+
+        function replay() {
+            var audio = document.getElementById("audio");
+            audio.currentTime = document.getElementById("low").value;
+            audio.play();
+        };
+
+        function pauseOnTime() {
+            var audio = document.getElementById("audio");
+            if (audio.currentTime > document.getElementById("high").value) {
+                audio.pause();
+            }
+        }
+
+        function updateLow(value) {
+            document.getElementById("show-low").innerText = Math.trunc(value / 60) + ':' + (value % 60);
+        };
+
+        function updateHigh(value) {
+            document.getElementById("show-high").innerText = Math.trunc(value / 60) + ':' + (value % 60);
+        };
+
+        function showParagraph() {
+            var p = document.getElementById("paragraph");
+            if (window.getComputedStyle(p).visibility === 'visible') {
+                p.style.visibility = 'hidden';
+            } else {
+                p.style.visibility = 'visible';
+            }
+        }
+
         function validate(input, word) {
             if (input.value.toLowerCase().trim() == word.toLowerCase().trim()) {
                 document.getElementById(input.id).style.borderColor = "Chartreuse";
