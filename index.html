@@ -102,19 +102,20 @@
 <body>
 
     <h2>Gap Fill Exercise</h2>
-    <audio id="audio" controls preload="auto" onpause="loopAudio()" ontimeupdate="pauseOnTime()">
-        <source src="data/brazil-oil.mp3" type="audio/mpeg">
+    <h3 id="exercise-name"></h3>
+    <div><button onclick="nextParagraph()">Next exercise</button></div>
+    <audio id="audio" controls preload="auto" ontimeupdate="pauseOnTime()" onpause="resetReplay()">
+        <source id="audio-source" src="data/brazil-oil.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
     <div>
         <div><span id="show-low">0:00</span> - <span id="show-high">0:00</span></div>
         <button onclick="replay()">Replay</button>
-        <label>Loop: </label><input type="checkbox" id="loop" name="loop" value="loop">
         <section class="range-slider" width="">
             <span class="rangeValues"></span>
-            <input  onchange="updateLow(this.value)" id="low" value="5" min="0" max="600" step="1" type="range">
-            <input  onchange="updateHigh(this.value)" id="high" value="10" min="0" max="600" step="1" type="range">
-          </section>
+            <input onchange="updateLow(this.value)" id="low" value="5" min="0" max="600" step="1" type="range">
+            <input onchange="updateHigh(this.value)" id="high" value="10" min="0" max="600" step="1" type="range">
+        </section>
     </div>
     <div>
         <button onclick="showParagraph()">Show/Hide</button>
@@ -123,14 +124,36 @@
     </div>
     <p id="paragraph" style="visibility: hidden;"></p>
     <script>
-        function loopAudio() {
-            if (document.getElementById("loop").checked) {
-                replay();
-            }
+        var isReplay = false;
+        var exerciseList = [];
+        fetch("metadata.json")
+            .then(x => x.text())
+            .then(x => {
+                exerciseList = JSON.parse(x);
+                nextParagraph();
+            });
+
+        function nextParagraph() {
+            var i = Math.floor(Math.random() * exerciseList.length);
+            var audioElement = document.getElementById("audio");
+            var sourceElement = document.getElementById("audio-source");
+            sourceElement.src = "data/" + exerciseList[i] + ".mp3";
+            audio.load();
+            fetch("data/" + exerciseList[i] + ".txt")
+                .then(x => x.text())
+                .then(x => {
+                    document.getElementById("paragraph").innerHTML = generateGapFill(x);
+                });
+            document.getElementById('exercise-name').innerText = exerciseList[i];
+            document.getElementById("paragraph").style.visibility = 'hidden';
         };
 
+        function resetReplay() {
+            isReplay = false;
+        }
 
         function replay() {
+            isReplay = true;
             var audio = document.getElementById("audio");
             audio.currentTime = document.getElementById("low").value;
             audio.play();
@@ -138,8 +161,9 @@
 
         function pauseOnTime() {
             var audio = document.getElementById("audio");
-            if (audio.currentTime > document.getElementById("high").value) {
+            if (isReplay && audio.currentTime > document.getElementById("high").value) {
                 audio.pause();
+                isReplay = false;
             }
         }
 
@@ -173,20 +197,18 @@
             var words = paragraph.split(" ");
             for (var i = 0; i < words.length; i++) {
                 var word = words[i];
-                if (word.length > 0) {
+                if (word.length > 2) {
                     if (Math.floor(Math.random() * 10) == 0) {
                         outputParagraph += '<input onkeyup="validate(this, &quot;' + word + '&quot;)" type="text" size="6" class="gap-fill" id="gap-' + i + '"> <label class="tooltip"><i class="fa fa-question"></i><input type="checkbox"><span>' + word + '</span></label> ';
                     } else {
                         outputParagraph += word + ' ';
                     }
+                } else {
+                    outputParagraph += word + ' ';
                 }
             }
             return outputParagraph;
         };
-
-        fetch("data/brazil-oil.txt")
-            .then(x => x.text())
-            .then(x => document.getElementById("paragraph").innerHTML = generateGapFill(x));
     </script>
 </body>
 
