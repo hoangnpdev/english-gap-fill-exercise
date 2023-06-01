@@ -227,15 +227,18 @@
         };
 
         function activeNext() {
-                var keys = Object.keys(gapMapper);
-                var active = true;
-                for (var i = 0; i < keys.length; i++) {
-                    active = active && gapMapper[keys[i]];
-                }
-                if (active) {
-                    document.getElementById("next-button").disabled = false;
-                }
-        
+            if (anySuggestionUsed) {
+                return;
+            }
+            var keys = Object.keys(gapMapper);
+            var active = true;
+            for (var i = 0; i < keys.length; i++) {
+                active = active && gapMapper[keys[i]];
+            }
+            if (active) {
+                document.getElementById("next-button").disabled = false;
+            }
+
         };
     </script>
 </body>
