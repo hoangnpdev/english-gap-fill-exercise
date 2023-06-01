@@ -142,6 +142,7 @@
         function resetExercise() {
             document.getElementById("paragraph").style.visibility = 'hidden';
             document.getElementById("paragraph").innerHTML = generateGapFill(originParagraph);
+            document.getElementById("next-button").disabled = true;
         };
 
         function nextParagraph() {
@@ -153,8 +154,8 @@
             fetch("data/" + exerciseList[i] + ".txt")
                 .then(x => x.text())
                 .then(x => {
-                    originParagraph = x;
-                    document.getElementById("paragraph").innerHTML = generateGapFill(x);
+                    originParagraph = x.replaceAll("\n", " ");
+                    document.getElementById("paragraph").innerHTML = generateGapFill(originParagraph);
                 });
             document.getElementById('exercise-name').innerText = exerciseList[i];
             document.getElementById("paragraph").style.visibility = 'hidden';
@@ -197,7 +198,7 @@
         }
 
         function validate(input, word) {
-            if (input.value.toLowerCase().trim() == word.toLowerCase().trim()) {
+            if (input.value.toLowerCase().trim() == word.replace(".", "").toLowerCase().trim()) {
                 document.getElementById(input.id).style.borderColor = "Chartreuse";
                 gapMapper[input.id] = true;
             } else {
