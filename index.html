@@ -103,7 +103,10 @@
 
     <h2>Gap Fill Exercise</h2>
     <h3 id="exercise-name"></h3>
-    <div><button onclick="nextParagraph()">Next exercise</button></div>
+    <div>
+        <button onclick="resetExercise()">Reset Exercise</button>
+        <button onclick="nextParagraph()" id="next-button" disabled>Next Exercise</button>
+    </div>
     <audio id="audio" controls preload="auto" ontimeupdate="pauseOnTime()" onpause="resetReplay()">
         <source id="audio-source" src="data/brazil-oil.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
@@ -124,14 +127,22 @@
     </div>
     <p id="paragraph" style="visibility: hidden;"></p>
     <script>
+        var anySuggestionUsed = false;
+        var originParagraph;
         var isReplay = false;
         var exerciseList = [];
+        var gapMapper = {};
         fetch("metadata.json")
             .then(x => x.text())
             .then(x => {
                 exerciseList = JSON.parse(x);
                 nextParagraph();
             });
+
+        function resetExercise() {
+            document.getElementById("paragraph").style.visibility = 'hidden';
+            document.getElementById("paragraph").innerHTML = generateGapFill(originParagraph);
+        };
 
         function nextParagraph() {
             var i = Math.floor(Math.random() * exerciseList.length);
@@ -142,6 +153,7 @@
             fetch("data/" + exerciseList[i] + ".txt")
                 .then(x => x.text())
                 .then(x => {
+                    originParagraph = x;
                     document.getElementById("paragraph").innerHTML = generateGapFill(x);
                 });
             document.getElementById('exercise-name').innerText = exerciseList[i];
@@ -150,7 +162,7 @@
 
         function resetReplay() {
             isReplay = false;
-        }
+        };
 
         function replay() {
             isReplay = true;
@@ -187,8 +199,10 @@
         function validate(input, word) {
             if (input.value.toLowerCase().trim() == word.toLowerCase().trim()) {
                 document.getElementById(input.id).style.borderColor = "Chartreuse";
+                gapMapper[input.id] = true;
             } else {
                 document.getElementById(input.id).style.borderColor = "red";
+                gapMapper[input.id] = false;
             }
         };
 
@@ -199,7 +213,8 @@
                 var word = words[i];
                 if (word.length > 2) {
                     if (Math.floor(Math.random() * 10) == 0) {
-                        outputParagraph += '<input onkeyup="validate(this, &quot;' + word + '&quot;)" type="text" size="6" class="gap-fill" id="gap-' + i + '"> <label class="tooltip"><i class="fa fa-question"></i><input type="checkbox"><span>' + word + '</span></label> ';
+                        gapMapper['gap-' + i] = false;
+                        outputParagraph += '<input onkeyup="validate(this, &quot;' + word + '&quot;);activeNext();" type="text" size="6" class="gap-fill" id="gap-' + i + '"> <label class="tooltip"><i class="fa fa-question"></i><input type="checkbox" onclick="anySuggestionUsed=true;"><span>' + word + '</span></label> ';
                     } else {
                         outputParagraph += word + ' ';
                     }
@@ -208,6 +223,18 @@
                 }
             }
             return outputParagraph;
+        };
+
+        function activeNext() {
+                var keys = Object.keys(gapMapper);
+                var active = true;
+                for (var i = 0; i < keys.length; i++) {
+                    active = active && gapMapper[keys[i]];
+                }
+                if (active) {
+                    document.getElementById("next-button").disabled = false;
+                }
+        
         };
     </script>
 </body>
