@@ -213,7 +213,7 @@
             for (var i = 0; i < words.length; i++) {
                 var word = words[i];
                 if (word.length > 2) {
-                    if (Math.floor(Math.random() * 5) == 0) {
+                    if (Math.floor(Math.random() * 3) == 0) {
                         gapMapper['gap-' + i] = false;
                         outputParagraph += '<input onkeyup="validate(this, &quot;' + word + '&quot;);activeNext();" type="text" size="6" class="gap-fill" id="gap-' + i + '"> <label class="tooltip"><i class="fa fa-question"></i><input type="checkbox" onclick="anySuggestionUsed=true;"><span>' + word + '</span></label> ';
                     } else {
