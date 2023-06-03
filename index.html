@@ -164,6 +164,14 @@
                 slider.value = parseInt(slider.value) - 10;
             }
             updateLow(slider.value);
+            if (event.keyCode == 32) {
+                var audio = document.getElementById("audio");
+                if (audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+            }
         }
 
         function replay() {
