@@ -62,15 +62,18 @@
     </style>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
 <body>
-
-    <h2>Gap Fill Exercise</h2>
+    <div class="w3-row">
+        <h2 class="w3-half">Gap Fill Exercise</h2>
+        <h2 class="w3-half" id="no-exercise">0</h2>
+    </div>
     <h3 id="exercise-name"></h3>
     <div>
         <button onclick="resetExercise()">Reset Exercise</button>
-        <button onclick="nextParagraph()" id="next-button" disabled>Next Exercise</button>
+        <button onclick="nextParagraph(); noExercise ++;" id="next-button" disabled>Next Exercise</button>
     </div>
     <audio id="audio" controls preload="auto" ontimeupdate="pauseOnTime()" onpause="resetReplay()" onloadedmetadata="updateSliderMax()">
         <source id="audio-source" src="data/brazil-oil.mp3" type="audio/mpeg">
@@ -93,6 +96,7 @@
     </div>
     <p id="paragraph" style="visibility: hidden;"></p>
     <script>
+        var noExercise = 0;
         var anySuggestionUsed = false;
         var originParagraph;
         var isReplay = false;
@@ -104,6 +108,12 @@
                 exerciseList = JSON.parse(x);
                 nextParagraph();
             });
+
+        updateNoExercise();
+
+        function updateNoExercise() {
+            document.getElementById('no-exercise').innerText = noExercise;
+        }
 
         function updateSliderMax() {
             console.log("ok");
