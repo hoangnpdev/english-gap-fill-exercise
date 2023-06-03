@@ -72,7 +72,7 @@
     <h3 id="exercise-name"></h3>
     <div>
         <button onclick="resetExercise()">Reset Exercise</button>
-        <button onclick="nextParagraph(); noExercise ++;" id="next-button" disabled>Next Exercise</button>
+        <button onclick="noExercise ++;nextParagraph(); " id="next-button" disabled>Next Exercise</button>
     </div>
     <audio id="audio" controls preload="auto" ontimeupdate="pauseOnTime()" onpause="resetReplay()"
         onloadedmetadata="updateSliderMax()">
@@ -220,7 +220,6 @@
                     .replace(".", "")
                     .replace("!", "")
                     .replace("\"", "")
-                    .replace(":", "")
                     .replace(";", "")
                     .replace("(", "")
                     .replace("?", "")
