@@ -165,12 +165,7 @@
             }
             updateLow(slider.value);
             if (event.keyCode == 32) {
-                var audio = document.getElementById("audio");
-                if (audio.paused) {
-                    audio.play();
-                } else {
-                    audio.pause();
-                }
+                replay();
             }
         }
 
