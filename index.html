@@ -59,41 +59,6 @@
             border-color: grey;
         }
 
-        section.range-slider {
-            position: relative;
-            width: 200px;
-            height: 35px;
-            text-align: center;
-        }
-
-        section.range-slider input {
-            pointer-events: none;
-            position: absolute;
-            overflow: hidden;
-            left: 0;
-            top: 15px;
-            width: 600px;
-            outline: none;
-            height: 18px;
-            margin: 0;
-            padding: 0;
-        }
-
-        section.range-slider input::-webkit-slider-thumb {
-            pointer-events: all;
-            position: relative;
-            z-index: 1;
-            outline: 0;
-        }
-
-        section.range-slider input::-moz-range-thumb {
-            pointer-events: all;
-            position: relative;
-            z-index: 10;
-            -moz-appearance: none;
-            width: 6px;
-            background-color: whitesmoke;
-        }
     </style>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -107,18 +72,19 @@
         <button onclick="resetExercise()">Reset Exercise</button>
         <button onclick="nextParagraph()" id="next-button" disabled>Next Exercise</button>
     </div>
-    <audio id="audio" controls preload="auto" ontimeupdate="pauseOnTime()" onpause="resetReplay()">
+    <audio id="audio" controls preload="auto" ontimeupdate="pauseOnTime()" onpause="resetReplay()" onloadedmetadata="updateSliderMax()">
         <source id="audio-source" src="data/brazil-oil.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
     <div>
-        <div><span id="show-low">0:00</span> - <span id="show-high">0:00</span></div>
-        <button onclick="replay()">Replay</button>
-        <section class="range-slider" width="">
-            <span class="rangeValues"></span>
-            <input onchange="updateLow(this.value)" id="low" value="5" min="0" max="600" step="1" type="range">
-            <input onchange="updateHigh(this.value)" id="high" value="10" min="0" max="600" step="1" type="range">
-        </section>
+        <div>
+            <button onclick="replay()">Replay</button>
+            <input type="number" id="replay-period" value="10">
+        </div>
+        <div>
+            <input onchange="updateLow(this.value)" id="low" value="5" min="0" max="600" step="1" type="range" style="width: 600px">
+            <span id="show-low">0:00</span>
+        </div>
     </div>
     <div>
         <button onclick="showParagraph()">Show/Hide</button>
@@ -138,6 +104,11 @@
                 exerciseList = JSON.parse(x);
                 nextParagraph();
             });
+
+        function updateSliderMax() {
+            console.log("ok");
+            document.getElementById("low").max = Math.trunc(document.getElementById("audio").duration);
+        }
 
         function resetExercise() {
             document.getElementById("paragraph").style.visibility = 'hidden';
@@ -165,6 +136,23 @@
             isReplay = false;
         };
 
+        document.onkeydown = function(event) {
+            var slider = document.getElementById("low");
+            if (event.keyCode == 37) {
+                slider.value = parseInt(slider.value) - 1;
+            }
+            if (event.keyCode == 39) {
+                slider.value = parseInt(slider.value) + 1;
+            }
+            if (event.keyCode == 38) {
+                slider.value = parseInt(slider.value) + 10;
+            }
+            if (event.keyCode == 40) {
+                slider.value = parseInt(slider.value) - 10;
+            }
+            updateLow(slider.value);
+        }
+
         function replay() {
             isReplay = true;
             var audio = document.getElementById("audio");
@@ -174,7 +162,8 @@
 
         function pauseOnTime() {
             var audio = document.getElementById("audio");
-            if (isReplay && audio.currentTime > document.getElementById("high").value) {
+            var end = parseInt(document.getElementById("low").value) + parseInt(document.getElementById("replay-period").value);
+            if (isReplay && audio.currentTime > end) {
                 audio.pause();
                 isReplay = false;
             }
