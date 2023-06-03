@@ -208,7 +208,7 @@
         }
 
         function validate(input, word) {
-            if (input.value.toLowerCase().trim() == word.toLowerCase().trim()) {
+            if (input.value.toLowerCase().trim() == cleanWord(word).toLowerCase().trim()) {
                 document.getElementById(input.id).style.borderColor = "Chartreuse";
                 gapMapper[input.id] = true;
             } else {
