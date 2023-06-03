@@ -58,7 +58,6 @@
         p input:focus {
             border-color: grey;
         }
-
     </style>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -75,7 +74,8 @@
         <button onclick="resetExercise()">Reset Exercise</button>
         <button onclick="nextParagraph(); noExercise ++;" id="next-button" disabled>Next Exercise</button>
     </div>
-    <audio id="audio" controls preload="auto" ontimeupdate="pauseOnTime()" onpause="resetReplay()" onloadedmetadata="updateSliderMax()">
+    <audio id="audio" controls preload="auto" ontimeupdate="pauseOnTime()" onpause="resetReplay()"
+        onloadedmetadata="updateSliderMax()">
         <source id="audio-source" src="data/brazil-oil.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
@@ -85,7 +85,8 @@
             <input type="number" id="replay-period" value="10">
         </div>
         <div>
-            <input onchange="updateLow(this.value)" id="low" value="5" min="0" max="600" step="1" type="range" style="width: 600px">
+            <input onchange="updateLow(this.value)" id="low" value="5" min="0" max="600" step="1" type="range"
+                style="width: 600px">
             <span id="show-low">0:00</span>
         </div>
     </div>
@@ -94,7 +95,9 @@
         <label>No. Gap: </label><input>
         <label>Length. Gap: </label><input>
     </div>
-    <p id="paragraph" style="visibility: hidden;"></p>
+    <div>
+        <p id="paragraph" style="visibility: hidden;"></p>
+    </div>
     <script>
         var noExercise = 0;
         var anySuggestionUsed = false;
@@ -135,7 +138,7 @@
             fetch("data/" + exerciseList[i] + ".txt")
                 .then(x => x.text())
                 .then(x => {
-                    originParagraph = x.replace(/\s\s+/g, ' ');
+                    originParagraph = x.replace(/\n/g, ' <br> ').replace(/\s+/g, ' ');
                     document.getElementById("paragraph").innerHTML = generateGapFill(originParagraph);
                 });
             document.getElementById('exercise-name').innerText = exerciseList[i];
@@ -146,7 +149,7 @@
             isReplay = false;
         };
 
-        document.onkeydown = function(event) {
+        document.onkeydown = function (event) {
             var slider = document.getElementById("low");
             if (event.keyCode == 37) {
                 slider.value = parseInt(slider.value) - 1;
@@ -211,7 +214,7 @@
             var words = paragraph.split(" ");
             for (var i = 0; i < words.length; i++) {
                 var word = words[i];
-                if (word.length > 2) {
+                if (word.length > 2 && word.trim() !== '<br>') {
                     if (Math.floor(Math.random() * 3) == 0) {
                         gapMapper['gap-' + i] = false;
                         outputParagraph += '<input onkeyup="validate(this, &quot;' + word + '&quot;);activeNext();" type="text" size="6" class="gap-fill" id="gap-' + i + '"> <label class="tooltip"><i class="fa fa-question"></i><input type="checkbox" onclick="anySuggestionUsed=true;"><span>' + word + '</span></label> ';
