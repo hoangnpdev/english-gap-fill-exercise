@@ -138,7 +138,10 @@
             fetch("data/" + exerciseList[i] + ".txt")
                 .then(x => x.text())
                 .then(x => {
-                    originParagraph = x.replace(/\n/g, ' <br> ').replace(/\s+/g, ' ');
+                    originParagraph = x
+                    .replaceAll('"', ' ')
+                    .replace(/\n/g, ' <br> ')
+                    .replace(/\s+/g, ' ');
                     document.getElementById("paragraph").innerHTML = generateGapFill(originParagraph);
                 });
             document.getElementById('exercise-name').innerText = exerciseList[i];
@@ -216,14 +219,17 @@
 
         function cleanWord(word) {
             return word
-                    .replace(",", "")
-                    .replace(".", "")
-                    .replace("!", "")
-                    .replace("\"", "")
-                    .replace(";", "")
-                    .replace("(", "")
-                    .replace("?", "")
-                    .replace(")", "");
+                    .replaceAll(",", "")
+                    .replaceAll(".", "")
+                    .replaceAll("!", "")
+                    .replaceAll("\"", "")
+                    .replaceAll(";", "")
+                    .replaceAll("(", "")
+                    .replaceAll("?", "")
+                    .replaceAll(")", "")
+                    .replaceAll("”", "")
+                    .replaceAll("“", "")
+                    .replaceAll("’", "");
         }
 
         function generateGapFill(paragraph) {
