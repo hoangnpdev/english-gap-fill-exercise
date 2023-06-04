@@ -166,7 +166,7 @@
                 slider.value = parseInt(slider.value) - 10;
             }
             updateLow(slider.value);
-            if (event.keyCode == 32) {
+            if (event.keyCode == 13) {
                 replay();
             }
         }
@@ -174,7 +174,7 @@
         function replay() {
             isReplay = true;
             var audio = document.getElementById("audio");
-            audio.currentTime = document.getElementById("low").value;
+            audio.currentTime = parseInt(document.getElementById("low").value);
             audio.play();
         };
 
