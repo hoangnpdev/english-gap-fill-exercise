@@ -124,6 +124,7 @@
         }
 
         function resetExercise() {
+            anySuggestionUsed = false;
             document.getElementById("paragraph").style.visibility = 'hidden';
             document.getElementById("paragraph").innerHTML = generateGapFill(originParagraph);
             document.getElementById("next-button").disabled = true;
