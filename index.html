@@ -234,6 +234,7 @@
         }
 
         function generateGapFill(paragraph) {
+            gapMapper = {};
             var outputParagraph = '';
             var words = paragraph.split(" ");
             for (var i = 0; i < words.length; i++) {
