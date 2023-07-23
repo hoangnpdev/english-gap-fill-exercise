@@ -82,11 +82,11 @@
     <div>
         <div>
             <button onclick="replay()">Replay</button>
-            <input type="number" id="replay-period" value="15">
+            <input type="number" id="replay-period" value="15" autocomplete="off">
         </div>
         <div>
             <input onchange="updateLow(this.value)" id="low" value="5" min="0" max="600" step="1" type="range"
-                style="width: 600px">
+                style="width: 600px" autocomplete="off">
             <span id="show-low">0:00</span>
         </div>
     </div>
@@ -243,7 +243,7 @@
                 if (word.length > 2 && word.trim() !== '<br>') {
                     if (Math.floor(Math.random() * 3) == 0) {
                         gapMapper['gap-' + i] = false;
-                        outputParagraph += '<input onkeyup="validate(this, &quot;' + word + '&quot;);activeNext();" type="text" size="6" class="gap-fill" id="gap-' + i + '"> <label class="tooltip"><i class="fa fa-question"></i><input type="checkbox" onclick="anySuggestionUsed=true;"><span>' + word + '</span></label> ';
+                        outputParagraph += '<input autocomplete="off" onkeyup="validate(this, &quot;' + word + '&quot;);activeNext();" type="text" size="6" class="gap-fill" id="gap-' + i + '"> <label class="tooltip"><i class="fa fa-question"></i><input type="checkbox" onclick="anySuggestionUsed=true;"><span>' + word + '</span></label> ';
                     } else {
                         outputParagraph += word + ' ';
                     }
