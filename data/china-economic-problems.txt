@@ -2,9 +2,9 @@ China's exports fell 14.5 percent in July compared with a year earlier. The repo
 
 In related economic news, a large Chinese financial services company has missed payments on some of its investment products. And a drop in home prices is adding to economic concerns in China.
 
-Zhongrong International Trust Co. holds a lot of property investments. A top official told investors that the company failed to make payments on a number of investment products since late last month.
+Zhongrong International Trust Company holds a lot of property investments. A top official told investors that the company failed to make payments on a number of investment products since late last month.
 
-China's economy
+:China's :economy
 
 On Tuesday, customs information was released showing that imports have fallen 12.4 percent. That hurts global exporters who see China as a big market for industrial materials, food and goods.
 
@@ -20,9 +20,9 @@ Demand for Chinese exports decreased after the American government and governmen
 
 Capital Economics is a research company based in London. It said the decrease in exports was the largest since the start of the COVID-19 pandemic in 2020. It said the decrease was mostly caused by lower prices, while the amount of goods was above levels before 2020.
 
-“We expect exports to decline further over the coming months before bottoming out toward the end of the year,” said Capital Economics in a report. It added that it expects the near-term to remain difficult for the buying of goods in developed economies.
+We expect exports to decline further over the coming months before bottoming out toward the end of the year,” said Capital Economics in a report. It added that it expects the near-term to remain difficult for the buying of goods in developed economies.
 
-Falling home prices
+:Falling :home :prices
 
 Adding to economic difficulties, China's new home prices fell in July for the first time this year.
 
@@ -31,5 +31,3 @@ Prices fell 0.2 percent month-on-month across the country and 0.1 percent year-o
 But the picture is far worse outside of the country's largest cities like Shanghai and Beijing. Reuters found that average new home prices in 35 small cities fell for the 17th straight month in June when compared to the year before, based on NBS information.
 
 I'm Gregory Stachel.
-
-Gregory Stachel adapted this report for VOA Learning English from Associated Press and Reuters materials.
