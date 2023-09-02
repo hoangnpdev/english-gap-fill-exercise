@@ -2,7 +2,7 @@ The United States has launched a competition for developing artificial intellige
 
 Anne Neuberger is the U.S. government's deputy national security advisor for cyber and emerging technology.
 
-She told Reuters news agency, "Cybersecurity is a race between offense and defense." She said bad actors are already using AI to identify weaknesses in systems and to build malicious software.
+She told Reuters news agency, "Cybersecurity is a race between offence and defence." She said bad actors are already using AI to identify weaknesses in systems and to build malicious software.
 
 A number of U.S. organizations, in healthcare, manufacturing and government, have been targets of hacking in recent years. Officials have warned about such threats, especially from foreign actors.
 
@@ -16,10 +16,8 @@ The event signals official attempts to deal with an emerging threat that experts
 
 Experts say such tools could make it far easier to carry out large hacking campaigns or create false identities on social media to spread lies and propaganda.
 
-Neuberger said the goal of the DARPA AI competition is to build a larger community of cyber defenders who use AI to help increase America’s cyber defenses.
+Neuberger said the goal of the DARPA AI competition is to build a larger community of cyber defenders who use AI to help increase America's cyber defenses.
 
 The Open Source Security Foundation, a group of experts trying to improve open source software security, will also be involved in the competition. It will make sure the "winning software code is put to use right away," the U.S. government said.
 
 I’m John Russell.
-
-Zeba Siddiqui reported on this story for Reuters. John Russell adapted it for VOA Learning English.
