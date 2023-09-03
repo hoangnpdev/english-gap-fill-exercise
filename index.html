@@ -82,7 +82,7 @@
     <div>
         <div>
             <button onclick="replay()">Replay</button>
-            <input type="number" id="replay-period" value="7" autocomplete="off">
+            <input type="number" id="replay-period" value="15" autocomplete="off">
         </div>
         <div>
             <input onchange="updateLow(this.value)" id="low" value="0" min="0" max="600" step="1" type="range"
@@ -247,8 +247,8 @@
             for (var i = 0; i < words.length; i++) {
                 var word = words[i];
                 if (word.length > 2 && word.trim() !== '<br>' && !word.includes(":")) {
-                    var rvalue = Math.floor(Math.random() * 3)
-                    if ( rvalue == 0 || rvalue == 1) {
+                    var rvalue = Math.floor(Math.random() * 5)
+                    if ( rvalue != 4) {
                         gapMapper['gap-' + i] = false;
                         outputParagraph += '<input autocomplete="off" onkeyup="validate(this, &quot;' + word + '&quot;);activeNext();" type="text" size="6" class="gap-fill" id="gap-' + i + '"> <label class="tooltip"><i class="fa fa-question"></i><input type="checkbox" onclick="anySuggestionUsed=true;"><span>' + word + '</span></label> ';
                     } else {
