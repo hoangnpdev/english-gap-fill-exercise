@@ -76,7 +76,7 @@
     </div>
     <audio id="audio" controls preload="auto" ontimeupdate="pauseOnTime()" onpause="resetReplay()"
         onloadedmetadata="updateSliderMax()">
-        <source id="audio-source" src="data/brazil-oil.mp3" type="audio/mpeg">
+        <source id="audio-source" src="" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
     <div>
@@ -216,6 +216,8 @@
         }
 
         function validate(input, word) {
+            console.log(input.value);
+            console.log(cleanWord(word));
             if (input.value.toLowerCase().trim() == cleanWord(word).toLowerCase().trim()) {
                 document.getElementById(input.id).style.borderColor = "Chartreuse";
                 gapMapper[input.id] = true;
@@ -226,7 +228,7 @@
         };
 
         function cleanWord(word) {
-            return word
+            return word.replaceAll("’", "'")
                     .replaceAll(",", "")
                     .replaceAll(".", "")
                     .replaceAll("!", "")
@@ -236,8 +238,7 @@
                     .replaceAll("?", "")
                     .replaceAll(")", "")
                     .replaceAll("”", "")
-                    .replaceAll("“", "")
-                    .replaceAll("’", "'");
+                    .replaceAll("“", "");
         }
 
         function generateGapFill(paragraph) {
