@@ -72,7 +72,7 @@
     <h3 id="exercise-name"></h3>
     <div>
         <button onclick="resetExercise()">Reset Exercise</button>
-        <button onclick="noExercise ++;nextParagraph(); " id="next-button" disabled>Next Exercise</button>
+        <button onclick="nextParagraph(); " id="next-button" disabled>Next Exercise</button>
     </div>
     <audio id="audio" controls preload="auto" ontimeupdate="pauseOnTime()" onpause="resetReplay()"
         onloadedmetadata="updateSliderMax()">
@@ -82,7 +82,7 @@
     <div>
         <div>
             <button onclick="replay()">Replay</button>
-            <input type="number" id="replay-period" value="15" autocomplete="off">
+            <input type="number" id="replay-period" value="7" autocomplete="off">
         </div>
         <div>
             <input onchange="updateLow(this.value)" id="low" value="0" min="0" max="600" step="1" type="range"
@@ -131,6 +131,9 @@
         };
 
         function nextParagraph() {
+            if (!isNaN(document.getElementById("audio").duration)) {
+                noExercise += Math.round(document.getElementById("audio").duration / 60 * 100) / 100;
+            };
             var i = Math.floor(Math.random() * exerciseList.length);
             var audioElement = document.getElementById("audio");
             var sourceElement = document.getElementById("audio-source");
@@ -140,9 +143,9 @@
                 .then(x => x.text())
                 .then(x => {
                     originParagraph = x
-                    .replaceAll('"', ' ')
-                    .replace(/\n/g, ' <br> ')
-                    .replace(/\s+/g, ' ');
+                        .replaceAll('"', ' ')
+                        .replace(/\n/g, ' <br> ')
+                        .replace(/\s+/g, ' ');
                     document.getElementById("paragraph").innerHTML = generateGapFill(originParagraph);
                 });
             document.getElementById('exercise-name').innerText = exerciseList[i];
@@ -166,7 +169,7 @@
                 slider.value = parseInt(slider.value) + 1;
             }
             if (event.keyCode == 38) {
-                
+
                 slider.value = parseInt(slider.value) + period;
             }
             if (event.keyCode == 40) {
@@ -177,7 +180,7 @@
                 replay();
             }
             if (event.keyCode == 192) {
-				console.log("reloading audio");
+                console.log("reloading audio");
                 document.getElementById("audio").load();
             }
         }
@@ -216,7 +219,7 @@
         }
 
         function validate(input, word) {
-        
+
             if (input.value.toLowerCase().trim() == cleanWord(word).toLowerCase().trim()) {
                 document.getElementById(input.id).style.borderColor = "Chartreuse";
                 gapMapper[input.id] = true;
@@ -228,16 +231,16 @@
 
         function cleanWord(word) {
             return word.replaceAll("’", "'")
-                    .replaceAll(",", "")
-                    .replaceAll(".", "")
-                    .replaceAll("!", "")
-                    .replaceAll("\"", "")
-                    .replaceAll(";", "")
-                    .replaceAll("(", "")
-                    .replaceAll("?", "")
-                    .replaceAll(")", "")
-                    .replaceAll("”", "")
-                    .replaceAll("“", "");
+                .replaceAll(",", "")
+                .replaceAll(".", "")
+                .replaceAll("!", "")
+                .replaceAll("\"", "")
+                .replaceAll(";", "")
+                .replaceAll("(", "")
+                .replaceAll("?", "")
+                .replaceAll(")", "")
+                .replaceAll("”", "")
+                .replaceAll("“", "");
         }
 
         function generateGapFill(paragraph) {
@@ -248,7 +251,7 @@
                 var word = words[i];
                 if (word.length > 2 && word.trim() !== '<br>' && !word.includes(":")) {
                     var rvalue = Math.floor(Math.random() * 5)
-                    if ( rvalue != 4) {
+                    if (rvalue != 4) {
                         gapMapper['gap-' + i] = false;
                         outputParagraph += '<input autocomplete="off" onkeyup="validate(this, &quot;' + word + '&quot;);activeNext();" type="text" size="6" class="gap-fill" id="gap-' + i + '"> <label class="tooltip"><i class="fa fa-question"></i><input type="checkbox" onclick="anySuggestionUsed=true;"><span>' + word + '</span></label> ';
                     } else {
