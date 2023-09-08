@@ -125,11 +125,20 @@
 
         function resetExercise() {
             anySuggestionUsed = false;
-            document.getElementById("paragraph").style.visibility = 'hidden';
-            document.getElementById("paragraph").innerHTML = generateGapFill(originParagraph);
-            document.getElementById("next-button").disabled = true;
+            fetch(exerciseName)
+                .then(x => x.text())
+                .then(x => {
+                    originParagraph = x
+                        .replaceAll('"', ' ')
+                        .replace(/\n/g, ' <br> ')
+                        .replace(/\s+/g, ' ');
+                        document.getElementById("paragraph").style.visibility = 'hidden';
+                        document.getElementById("paragraph").innerHTML = generateGapFill(originParagraph);
+                        document.getElementById("next-button").disabled = true;
+                });
         };
 
+        let exerciseName = '';
         function nextParagraph() {
             if (!isNaN(document.getElementById("audio").duration)) {
                 noExercise += Math.round(document.getElementById("audio").duration / 60 * 100) / 100;
@@ -139,6 +148,7 @@
             var sourceElement = document.getElementById("audio-source");
             sourceElement.src = "data/" + exerciseList[i] + ".mp3";
             audio.load();
+            exerciseName = "data/" + exerciseList[i] + ".txt";
             fetch("data/" + exerciseList[i] + ".txt")
                 .then(x => x.text())
                 .then(x => {
