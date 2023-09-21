@@ -100,7 +100,7 @@
     </div>
     <script>
         var noExercise = 0;
-        var anySuggestionUsed = false;
+        var anySuggestionUsed = 0;
         var originParagraph;
         var isReplay = false;
         var exerciseList = [];
@@ -124,7 +124,7 @@
         }
 
         function resetExercise() {
-            anySuggestionUsed = false;
+            anySuggestionUsed = 0;
             fetch(exerciseName)
                 .then(x => x.text())
                 .then(x => {
@@ -263,7 +263,7 @@
                     var rvalue = Math.floor(Math.random() * 5)
                     if (rvalue != 4) {
                         gapMapper['gap-' + i] = false;
-                        outputParagraph += '<input autocomplete="off" onkeyup="validate(this, &quot;' + word + '&quot;);activeNext();" type="text" size="6" class="gap-fill" id="gap-' + i + '"> <label class="tooltip"><i class="fa fa-question"></i><input type="checkbox" onclick="anySuggestionUsed=true;"><span>' + word + '</span></label> ';
+                        outputParagraph += '<input autocomplete="off" onkeyup="validate(this, &quot;' + word + '&quot;);activeNext();" type="text" size="6" class="gap-fill" id="gap-' + i + '"> <label class="tooltip"><i class="fa fa-question"></i><input type="checkbox" onclick="addAnySuggestion(this);"><span>' + word + '</span></label> ';
                     } else {
                         outputParagraph += word + ' ';
                     }
@@ -274,8 +274,15 @@
             return outputParagraph;
         };
 
+        function addAnySuggestion(elementRef) {
+            console.log(elementRef.checked);
+            if (elementRef.checked) {
+                anySuggestionUsed ++;
+            }
+        }
+
         function activeNext() {
-            if (anySuggestionUsed) {
+            if (anySuggestionUsed > 5) {
                 return;
             }
             var keys = Object.keys(gapMapper);
