@@ -140,6 +140,7 @@
 
         let exerciseName = '';
         function nextParagraph() {
+            anySuggestionUsed = 0;
             if (!isNaN(document.getElementById("audio").duration)) {
                 noExercise += Math.round(document.getElementById("audio").duration / 60 * 100) / 100;
             };
