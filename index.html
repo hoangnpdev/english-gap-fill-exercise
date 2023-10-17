@@ -166,6 +166,34 @@
             audio.load();
         };
 
+
+        function selectParagraph(paragraphName) {
+            anySuggestionUsed = 0;
+            if (!isNaN(document.getElementById("audio").duration)) {
+                noExercise += Math.round(document.getElementById("audio").duration / 60 * 100) / 100;
+            };
+            var i = exerciseList.indexOf(paragraphName);
+            var audioElement = document.getElementById("audio");
+            var sourceElement = document.getElementById("audio-source");
+            sourceElement.src = "data/" + exerciseList[i] + ".mp3";
+            audio.load();
+            exerciseName = "data/" + exerciseList[i] + ".txt";
+            fetch("data/" + exerciseList[i] + ".txt")
+                .then(x => x.text())
+                .then(x => {
+                    originParagraph = x
+                        .replaceAll('"', ' ')
+                        .replace(/\n/g, ' <br> ')
+                        .replace(/\s+/g, ' ');
+                    document.getElementById("paragraph").innerHTML = generateGapFill(originParagraph);
+                });
+            document.getElementById('exercise-name').innerText = exerciseList[i];
+            document.getElementById("paragraph").style.visibility = 'hidden';
+            document.getElementById("next-button").disabled = true;
+            updateNoExercise();
+            audio.load();
+        };
+
         function resetReplay() {
             isReplay = false;
         };

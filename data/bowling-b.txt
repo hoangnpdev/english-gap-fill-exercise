@@ -1,12 +1,12 @@
 Employee: Hi! Welcome to Lucky Strike. How are you doing today?
 
-Mike: We're fine, thank you. Can we please get two rounds of bowling.
+Mike: Fine, thank you. Can we please get two rounds of bowling.
 
 Employee: Alright. How many lanes do you guys want?
 
-Mike: Just one for the three of us.
+Mike: Just one is fine.
 
-Employee: Sure, one lane. Can you please give me your shoe sizes?
+Employee: Alright, one lane. Can you please give me your shoe sizes?
 
 Mike: I'm ten and a half.
 
@@ -14,22 +14,21 @@ Maria: I'm size nine.
 
 Doug: I'm a size twelve.
 
-Employee: Thank you very much. Here are your bowling shoes. Your lane is number nine. Just over there. Have fun and play safe.
+Employee: Thank you very much. Here are your bowling shoes. Your lane is lane number nine. Just over there. Have fun and play safe.
 
-(Mike pays the employee. The three walk to their lane and put on their bowling shoes.)
+(Mike, Doug and Maria walk to their lane and put on their bowling shoes.)
 
 Mike: Are you guys ready to bowl?
 
 Maria: Don't we have to put our names on the computer first?
 
-Mike: You're right, Maria. How could I forget? I'll just put down my regular name.
+Mike: You're right, Maria. How could I forget? I'll just put my regular name.
 
-Maria: You can just put down my regular name, too.
+Maria: You can just put my regular name, as well.
 
+Mike: What about you, Doug? Do you want me to put just Doug?
 
-Mike: What about you, Doug? Do you want me to just put Doug?
-
-Doug: No, I want a funny name for mine. Type Big Bad Bowler Doug.
+Doug: No, I want a funny name for mine. Type Big Doug.
 
 Mike: I don't think it fits that many letters.
 
@@ -39,11 +38,11 @@ Doug: Fine, just put my regular name.
 
 Maria: Wow, I didn't know you were such a good bowler, Mike.
 
-Doug: Yeah, me neither. When did you become so good, Mike?
+Doug: Yeah, me neither. When did you become such a good bowler, Mike?
 
 Mike: I don't know. I've always just played casually. I think it might just be good luck.
 
-Doug: Well, we have one more round to play. Let's find out if that's true or not.
+Doug: We have one more round to play. Let's find out if that's true or not.
 
 Maria: These bowling balls are kind of heavy.
 
@@ -51,4 +50,4 @@ Mike: There are smaller ones over here, Maria.
 
 Maria: Oh, I didn't see them.
 
-(The night ends in laughter and dinner at the Lucky Strike restaurant.)
+(Mike, Doug and Maria play the last round. Mike wins again. The night ends in laughter)
