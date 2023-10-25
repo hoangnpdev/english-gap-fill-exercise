@@ -35,7 +35,7 @@ Mike: I'll be over here playing Galaga!
 
 Maria: I lost. How are you doing? What level are you in?
 
-Mike: Level thirty-two! I'm trying to beat my own score of one hundred and three! I still have yet to beat my dad's score.
+Mike: Level thirty-two! I'm trying to beat my own score of one hundred and three! Still i have yet to beat my dad's score.
 
 Maria: What's his highest score?
 

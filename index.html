@@ -169,9 +169,6 @@
 
         function selectParagraph(paragraphName) {
             anySuggestionUsed = 0;
-            if (!isNaN(document.getElementById("audio").duration)) {
-                noExercise += Math.round(document.getElementById("audio").duration / 60 * 100) / 100;
-            };
             var i = exerciseList.indexOf(paragraphName);
             var audioElement = document.getElementById("audio");
             var sourceElement = document.getElementById("audio-source");
@@ -221,6 +218,19 @@
             if (event.keyCode == 192) {
                 console.log("reloading audio");
                 document.getElementById("audio").load();
+            }
+            if (event.keyCode == 36) {
+                if (document.getElementById("audio").paused) {
+                    isReplay = true;
+                    document.getElementById("audio").play();
+                } else {
+                    document.getElementById("audio").pause();
+                }
+                
+            }
+
+            if (event.keyCode == 45) {
+                slider.value = document.getElementById("audio").currentTime;
             }
         }
 
